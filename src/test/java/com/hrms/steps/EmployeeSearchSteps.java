@@ -1,6 +1,11 @@
 package com.hrms.steps;
 
+
+
+import org.junit.Assert;
+
 import com.hrms.utils.CommonMethods;
+import com.hrms.utils.GlobalVariables;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -14,9 +19,12 @@ public class EmployeeSearchSteps extends CommonMethods {
 		jsClick(dashboard.empListPage);
 	}
 
-	@When("user enters valid employee id")
-	public void user_enters_valid_employee_id() {
-		sendText(viewEmp.EmpID, "10079");
+	
+	
+	@When("user enters valid employee id {string}")
+	public void user_enters_valid_employee_id(String empId) {
+			sendText(viewEmp.EmpID, empId);
+			GlobalVariables.empID = empId;
 	}
 
 	@When("click on search button")
@@ -32,6 +40,20 @@ public class EmployeeSearchSteps extends CommonMethods {
 	@When("user enters valid employee name and last name")
 	public void user_enters_valid_employee_name_and_last_name() {
 		
+	}
+	@Then("verify table is displayed")
+	public void verify_table_is_displayed() {
+		Assert.assertEquals(true, viewEmp.isTableDisplayed());
+	}
+
+	@Then("get first name from table")
+	public void get_first_name_from_table() {
+		System.out.println(viewEmp.getFirstNameFromTable());
+	}
+	
+	@Then("verify first name from ui against db")
+	public void verify_first_name_from_ui_against_db() {
+		Assert.assertEquals(DBSteps.dbData, viewEmp.getFirstNameFromTable());
 	}
 
 }

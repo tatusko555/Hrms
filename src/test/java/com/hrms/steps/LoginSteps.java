@@ -35,6 +35,7 @@ public class LoginSteps extends CommonMethods{
 	@Then("admin user is successfully logged in")
 	public void admin_user_is_successfully_logged_in() {
 		String expected = "Welcome Admin";
+		waitForVisibility(dashboard.welcome);
 		String actual = dashboard.welcome.getText();
 		Assert.assertEquals("Welcome message is not displayed or not correct ", expected, actual );
 		System.out.println(actual);
@@ -50,6 +51,7 @@ public class LoginSteps extends CommonMethods{
 	public void ess_user_is_successfully_logged_in() {
 		String expected = "Welcome Elvira";
 		String actual = dashboard.welcome.getText();
+		wait(3);
 		Assert.assertEquals("Welcome text is NOT displayed correctly", expected, actual);
 	}
 
@@ -65,7 +67,9 @@ public class LoginSteps extends CommonMethods{
 	}
 	
 	@When("user enter valid {string} and {string}")
-	public void user_enter_valid_and(String string, String string2) {
+	public void user_enter_valid_and(String username, String password) {
+		sendText(login.username, username);
+		sendText(login.password, password);
 	}
 
 	@Then("{string} is successfully logged in")

@@ -43,6 +43,7 @@ public class AddEmployeeSteps extends CommonMethods {
 	// this method has hardcoded values
 	@Then("employee is added successfully")
 	public void employee_is_added_successfully() {
+		waitForVisibility(pdetails.profilePic);
 		String actual = pdetails.profilePic.getText();
 		String expectedName = "James Bond";
 		Assert.assertEquals(expectedName, actual);
@@ -51,6 +52,7 @@ public class AddEmployeeSteps extends CommonMethods {
 	// this method is enhanced method and parameter values are supplied from FF
 	@Then("{string} is added successfully")
 	public void employee_is_added_successfully(String expectedName) {
+		waitForVisibility(pdetails.profilePic);
 		String actual = pdetails.profilePic.getText();
 		Assert.assertEquals(expectedName, actual);
 	}
@@ -78,7 +80,7 @@ public class AddEmployeeSteps extends CommonMethods {
 	}
 
 	@Then("{string}, {string} and {string} is added successfully")
-	public void and_is_added_successfully(String fname, String middleName, String laName) {
+	public void and_is_added_successfully(String fname, String mName, String laName) {
 		System.out.println("I added the employee !!!!!!!!!!!!!!!!!!!!!!!");
 		wait(2);
 	}
@@ -98,7 +100,7 @@ public class AddEmployeeSteps extends CommonMethods {
 			sendText(addEmp.lastName, lname);
 			click(addEmp.saveBtn);
 			//adding assertion
-			
+			waitForVisibility(pdetails.profilePic);
 			String actual=pdetails.profilePic.getText();
 			String expected=fname+" "+mname+" "+lname;
 			Assert.assertEquals("Employee is not addedd successfully", expected, actual);
@@ -115,38 +117,23 @@ public class AddEmployeeSteps extends CommonMethods {
 	@When("user enters employee data from {string} excel sheet then employee is added")
 	public void user_enters_employee_data_from_excel_sheet_then_employee_is_added(String sheetName) {
 		List<Map<String, String>> excelList = ExcelUtility.excelIntoListOfMaps(Constants.TESTDATA_FILEPATH, sheetName);
-		
-		//HW to finish
+
+		for (Map<String, String> data : excelList) {
+			String fname = data.get("FirstName");
+			String mname = data.get("MiddleName");
+			String lname = data.get("LastName");
+
+			sendText(addEmp.firstName, fname);
+			sendText(addEmp.middleName, mname);
+			sendText(addEmp.lastName, lname);
+			click(addEmp.saveBtn);
+			waitForVisibility(pdetails.profilePic);
+			String actual = pdetails.profilePic.getText();
+			String expected = fname + " " + mname + " " + lname;
+			Assert.assertEquals("Employee is not addedd successfully", expected, actual);
+			jsClick(dashboard.addEmp);
+
+		}
+
 	}
-//	List<Map<String, String>> dataSet = ExcelUtility.excelIntoListOfMaps(Constants.TEST_DATA_FILEPATH, "addEmp");  //Diffrences asMaps
-    //only use Constants
-//for (Map<String, String>  data : dataSet) {
-//
-//wait(3);
-//waitAndClick(addEmp.createLoginDetails);
-//
-//sendText(addEmp.empFirstName, data.get("FirstName"));
-//sendText(addEmp.empMiddleName, data.get("MiddleName"));
-//sendText(addEmp.empLastName, data.get("LastName"));
-//
-//String expectedId= addEmp.employeeId.getAttribute("value");
-//
-//sendText(addEmp.empUsername, data.get("username"));
-//sendText(addEmp.empPassword, data.get("password"));
-//sendText(addEmp.empRePassword, data.get("password"));
-//
-//waitAndClick(addEmp.saveEmp);
-//
-//String actualId =addEmp.employeeId.getAttribute("value");
-//
-//Assert.assertEquals("Test Case failed.", expectedId, actualId);
-//
-//dashboard.navigateToAddEmp();
-//
-//wait(2);
-//}
-//
-//System.out.println("Employee is added successfully.");
-//
-//}
 }

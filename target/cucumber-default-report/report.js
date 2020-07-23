@@ -1,13 +1,18 @@
-$(document).ready(function() {var formatter = new CucumberHTML.DOMFormatter($('.cucumber-report'));formatter.uri("file:src/test/resources/features/Dashboard.feature");
+$(document).ready(function() {var formatter = new CucumberHTML.DOMFormatter($('.cucumber-report'));formatter.uri("file:src/test/resources/features/NameValidationsInDB.feature");
 formatter.feature({
-  "name": "Dashboard",
+  "name": "Name validations against DB",
   "description": "",
   "keyword": "Feature"
 });
-formatter.background({
-  "name": "",
+formatter.scenario({
+  "name": "First Name validation against DB",
   "description": "",
-  "keyword": "Background"
+  "keyword": "Scenario",
+  "tags": [
+    {
+      "name": "@DB"
+    }
+  ]
 });
 formatter.before({
   "status": "passed"
@@ -22,71 +27,77 @@ formatter.match({
 formatter.result({
   "status": "passed"
 });
-formatter.scenario({
-  "name": "modify employee personal details",
-  "description": "",
-  "keyword": "Scenario",
-  "tags": [
-    {
-      "name": "@HW"
-    }
-  ]
-});
 formatter.step({
-  "name": "user navigates to AddEmployeePage",
+  "name": "user navigate to employee list page",
   "keyword": "And "
 });
 formatter.match({
-  "location": "com.hrms.steps.AddEmployeeSteps.user_navigates_to_AddEmployeePage()"
+  "location": "com.hrms.steps.EmployeeSearchSteps.user_navigate_to_employee_list_page()"
 });
 formatter.result({
   "status": "passed"
 });
 formatter.step({
-  "name": "user enters employees first name and last name",
+  "name": "user enters valid employee id \"14688\"",
   "keyword": "When "
 });
 formatter.match({
-  "location": "com.hrms.steps.AddEmployeeSteps.user_enters_employees_first_name_and_last_name()"
+  "location": "com.hrms.steps.EmployeeSearchSteps.user_enters_valid_employee_id(java.lang.String)"
 });
 formatter.result({
   "status": "passed"
 });
 formatter.step({
-  "name": "user clicks save button",
+  "name": "click on search button",
   "keyword": "And "
 });
 formatter.match({
-  "location": "com.hrms.steps.AddEmployeeSteps.user_clicks_save_button()"
+  "location": "com.hrms.steps.EmployeeSearchSteps.click_on_search_button()"
 });
 formatter.result({
   "status": "passed"
 });
 formatter.step({
-  "name": "user clicks on edit button",
-  "keyword": "And "
-});
-formatter.match({
-  "location": "com.hrms.steps.DashboardSteps.user_clicks_on_edit_button()"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "user modifies employee personal data",
-  "rows": [
-    {},
-    {}
-  ],
+  "name": "verify table is displayed",
   "keyword": "Then "
 });
 formatter.match({
-  "location": "com.hrms.steps.DashboardSteps.user_modifies_employee_personal_data(io.cucumber.datatable.DataTable)"
+  "location": "com.hrms.steps.EmployeeSearchSteps.verify_table_is_displayed()"
 });
 formatter.result({
   "status": "passed"
 });
-formatter.embedding("image/png", "embedded0.png", "modify employee personal details");
+formatter.step({
+  "name": "get first name from table",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "com.hrms.steps.EmployeeSearchSteps.get_first_name_from_table()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "get data from db",
+  "keyword": "When "
+});
+formatter.match({
+  "location": "com.hrms.steps.DBSteps.get_data_from_db()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "verify first name from ui against db",
+  "keyword": "Then "
+});
+formatter.match({
+  "location": "com.hrms.steps.EmployeeSearchSteps.verify_first_name_from_ui_against_db()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.embedding("image/png", "embedded0.png", "First Name validation against DB");
 formatter.after({
   "status": "passed"
 });

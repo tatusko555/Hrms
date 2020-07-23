@@ -1,7 +1,7 @@
  Feature: login to HRMS
 
 	 #previously written test
-  @maven
+  @smoke
   Scenario: valid admin login
     When user enter valid admin username and password
     And user click on login button
@@ -31,7 +31,7 @@
     And user click on login button
     Then User see Invalid Credentials text on login page
     
-   @invalidCredentials 
+   @smoke 
     Scenario: Login with invalid credentials
   When I enter invalid username and password and see error message
    | UserName | Password  | ErrorMessage    |

@@ -47,6 +47,7 @@ public class DashboardSteps extends CommonMethods {
 			sendText(pdetails.sinNumber, m.get("SIN Number"));
 			WebElement male = pdetails.genderRadioGroup.get(0);
 			click(male);
+			//clickRadioOrCheckbox(pdetails.genderRadioGroup, "Male");
 			wait(3);
 			selectDdValue(pdetails.maritalStatusDD, m.get("Marital Status"));
 			selectDdValue(pdetails.nationalityDD, m.get("Nationality"));

@@ -15,11 +15,12 @@ import io.cucumber.junit.CucumberOptions;
 					//change to false to run it
 		monochrome = true,//more readable format in console
 		strict = true,
-		tags = "@HW",
+		tags = "@DB",
 		plugin = {
 				"pretty", //prints gherkin steps in console
 				"html:target/cucumber-default-report", //creates basic html report in specified location
-				"json:target/cucumber.json"
+				"json:target/cucumber.json",
+				"rerun:target/failed.txt"
 				}
 		)
 public class TestRunner {

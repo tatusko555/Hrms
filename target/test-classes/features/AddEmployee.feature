@@ -40,7 +40,7 @@ Feature: Add new Employee
       | Yunus     | Emre       | Yakut     |
 
   #adding multiple employees using Cucumber DataTable
-  @inProgress
+  @regression
   Scenario: Adding multiple employees
     When user enters employee details and click on save then employee is added
       | FirstName | MiddleName | LastName |
@@ -49,6 +49,6 @@ Feature: Add new Employee
   
   @excel    
   Scenario: Adding multiple employees from excel
-  When user enters employee data from "Employee" excel sheet then employee is added    
+  When user enters employee data from "addEmp" excel sheet then employee is added    
       
       
