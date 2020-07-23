@@ -28,7 +28,7 @@ public class BaseClass {
 			WebDriverManager.chromedriver().setup();
 			ChromeOptions cOption  = new ChromeOptions();
 			if(headless.equalsIgnoreCase("true")) {
-				//cOption.setHeadless(true);
+				cOption.setHeadless(true);
 				driver = new ChromeDriver(cOption);
 			} else {
 				driver = new ChromeDriver(cOption);
